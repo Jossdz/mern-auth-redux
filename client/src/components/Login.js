@@ -4,13 +4,18 @@ import { connect } from 'react-redux'
 
 import * as actions from '../actions'
 
-import swal from 'sweetalert2'
+
 
 class Login extends Component {
   state = {
     user: '',
     password: '',
     username: ''
+  }
+
+  componentWillReceiveProps({data}){
+    const {user} = data
+    this.setState({ user })
   }
 
   inputChange = event => {
