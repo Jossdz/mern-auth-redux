@@ -13,7 +13,6 @@ import reducers from './reducers'
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk))
 window.store = store 
-
 ReactDOM.render(
   <Provider store={store}>
     <App/>
