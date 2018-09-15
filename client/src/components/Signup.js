@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect, Link } from 'react-router-dom'
+import swal from 'sweetalert2'
 
 class Signup extends Component {
   state = {
@@ -17,15 +18,24 @@ class Signup extends Component {
     })
   }
 
+  submit = event => {
+    event.preventDefault()
+    swal({
+      type: 'success',
+      title: 'Usuario Creado',
+      text: this.state.username
+    })
+  }
+
   onRedirect = () => {
     return (this.state.user === '') ?
-      <form>
+      <form onSubmit={this.submit}>
         <label htmlfor='username'>Username</label>
         <input onChange={this.inputChange} name='username' id='username' type='text'/>
         <label htmlfor='password'>Password</label>
         <input onChange={this.inputChange} name='password' id='password' type='password'/>
-        <input type='submit' value='Signup'/>
-        <span>or <Link to='/login'>Login</Link></span>
+        <input type='submit' value='Signup' className='btn btn-success'/>
+        <span> or <Link to='/login'>Login</Link></span>
       </form> :
     <Redirect to='/'/>
   }
