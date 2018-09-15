@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import * as actions from '../actions'
+
 import swal from 'sweetalert2'
 
 class Login extends Component {
@@ -19,12 +23,9 @@ class Login extends Component {
   }
 
   submit = event => {
+    const {username, password} = this.state
     event.preventDefault()
-    swal({
-      type: 'success',
-      title: 'Usuario Creado',
-      text: this.state.username
-    })
+    this.props.loginUser(username, password)
   }
 
   onRedirect = () => {
@@ -48,4 +49,8 @@ class Login extends Component {
   }
 }
 
-export default Login
+const mapStateToProps = ({ auth }) => {
+ return auth
+}
+
+export default connect(mapStateToProps, actions)(Login)

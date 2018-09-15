@@ -1,6 +1,6 @@
 import { SIGNUP_USER } from '../actions/types'
 
-export default (state = null, action) => {
+export default (state = {}, action) => {
   console.log(action.type)
   switch(action.type){
     default:
