@@ -14,8 +14,10 @@ class Login extends Component {
   }
 
   componentWillReceiveProps({data}){
-    const {user} = data
-    this.setState({ user })
+    if(data){
+      const {user} = data
+      this.setState({ user })
+    }
   }
 
   inputChange = event => {

@@ -7,13 +7,19 @@ class Private extends Component{
     user : ''
   }
 
+  componentWillReceiveProps(props){
+    if(!props.data){
+      this.setState({user: ''})
+    }
+  }
+
   componentWillMount(){
     if(this.props.data){
       this.setState({
         user: this.props.data.username 
       })
     }
-    
+
   }
 
   onRedirect = () => {

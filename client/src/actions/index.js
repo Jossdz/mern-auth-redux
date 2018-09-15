@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { LOGIN_USER, SIGNUP_USER } from './types'
+import { LOGIN_USER, LOGOUT_USER } from './types'
 
 import swal from 'sweetalert2'
 
@@ -20,9 +20,16 @@ export const loginUser = (username, password) => {
     })
     .then(res => {
       console.log(res)
-      dispatch({
-      type: LOGIN_USER, 
-      payload: res
-    }) })   
+      dispatch({ type: LOGIN_USER, payload: res}) })   
   }
+}
+
+export const logoutUser = () => async dispatch => {
+  const res = await axios.get(`${baseURL}/logout`)
+  swal({
+    type: 'success',
+    title: 'Adios',
+  })
+  console.log(res)
+  dispatch({type: LOGOUT_USER, payload: {}})
 }

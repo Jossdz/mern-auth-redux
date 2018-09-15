@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { connect} from 'react-redux'
+import * as actions from '../actions'
 class Header extends React.Component{
+
+  handleLogout = () => {
+    this.props.logoutUser()
+  }
+
   render(){
     return (
     <nav className='indigo darken-1'>
@@ -11,6 +17,7 @@ class Header extends React.Component{
           <li> <Link to='/signup'>  Signup </Link> </li>
           <li> <Link to='/login'>   Login </Link> </li>
           <li> <Link to='/private'> Private</Link></li>
+          <li> <a onClick={this.handleLogout}>Logout</a> </li>
         </ul>
       </div>
     </nav>
@@ -18,4 +25,4 @@ class Header extends React.Component{
   }
 }
 
-export default Header
+export default connect(null, actions)(Header)
