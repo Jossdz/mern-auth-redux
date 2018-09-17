@@ -12,6 +12,12 @@ export const loginUser = (username, password) => async dispatch => {
     dispatch({ type: LOGIN_USER, payload: res}) 
   }
 
+  export const signupUser = (username, password) => async dispatch => {
+    const res = await axios.post(`${baseURL}/signup`, {username, password})
+    swal({ type: 'success', title: 'Bienvenido', text: res.data.username})
+    dispatch({ type: LOGIN_USER, payload: res}) 
+  }
+
 export const logoutUser = () => async dispatch => {
   const res = await axios.get(`${baseURL}/logout`)
   swal({ type: 'success', title: 'Adios' })

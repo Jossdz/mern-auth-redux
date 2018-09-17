@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Redirect, Link } from 'react-router-dom'
-import swal from 'sweetalert2'
+import { connect } from 'react-redux'
+
+import * as actions from '../actions'
 
 class Signup extends Component {
   state = {
@@ -8,6 +10,14 @@ class Signup extends Component {
     password: '',
     username: ''
   }
+
+  componentWillReceiveProps({data}){
+    if(data){
+      const {user} = data
+      this.setState({ user })
+    }
+  }
+
 
   inputChange = event => {
     const { target } = event
@@ -19,12 +29,9 @@ class Signup extends Component {
   }
 
   submit = event => {
+    const {username, password} = this.state
     event.preventDefault()
-    swal({
-      type: 'success',
-      title: 'Usuario Creado',
-      text: this.state.username
-    })
+    this.props.signupUser(username, password)
   }
 
   onRedirect = () => {
@@ -48,4 +55,8 @@ class Signup extends Component {
   }
 }
 
-export default Signup
+const mapStateToProps = ({ auth }) => {
+  return auth
+ }
+
+export default connect(mapStateToProps, actions)(Signup)
