@@ -3,9 +3,36 @@ import { Link } from 'react-router-dom'
 import { connect} from 'react-redux'
 import * as actions from '../actions'
 class Header extends React.Component{
+  state = {
+    user: ''
+  }
 
   handleLogout = () => {
     this.props.logoutUser()
+  }
+  componentWillReceiveProps({data}){
+    console.log('data: ',data)
+    if(data){
+      this.setState({
+        user: data.username
+      })
+    }else if(data === undefined){
+      this.setState({
+        user: ''
+      })
+    }
+  }
+
+  renderNav = () => {
+    return (this.state.user === '') ?
+      <div>
+        <li> <Link to='/signup'>  Signup </Link> </li>
+        <li> <Link to='/login'>   Login </Link> </li>
+      </div> :
+      <div>
+        <li> <Link to='/private'> Private</Link></li>
+        <li> <a onClick={this.handleLogout}>Logout</a> </li>
+      </div>
   }
 
   render(){
@@ -14,10 +41,7 @@ class Header extends React.Component{
       <div className="nav-wrapper container">
         <Link to='/' className="brand-logo">Redux</Link>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
-          <li> <Link to='/signup'>  Signup </Link> </li>
-          <li> <Link to='/login'>   Login </Link> </li>
-          <li> <Link to='/private'> Private</Link></li>
-          <li> <a onClick={this.handleLogout}>Logout</a> </li>
+          { this.renderNav() }
         </ul>
       </div>
     </nav>
@@ -25,4 +49,6 @@ class Header extends React.Component{
   }
 }
 
-export default connect(null, actions)(Header)
+const mapStateToProps = ({auth}) => auth
+
+export default connect(mapStateToProps, actions)(Header)
