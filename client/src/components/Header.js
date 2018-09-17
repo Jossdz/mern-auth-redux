@@ -12,13 +12,13 @@ class Header extends React.Component{
   }
   componentWillReceiveProps({data}){
     console.log('data: ',data)
-    if(data){
-      this.setState({
-        user: data.username
-      })
-    }else if(data === undefined){
+    if(data === undefined){
       this.setState({
         user: ''
+      })
+    }else {
+      this.setState({
+        user: data.username
       })
     }
   }
