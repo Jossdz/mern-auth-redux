@@ -1,21 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Router from './routes'
 
 import 'sweetalert2/dist/sweetalert2.min.css'
-import 'materialize-css/dist/css/materialize.min.css'
+import './styles.css'
 
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import reduxThunk from 'redux-thunk'
+import thunk from 'redux-thunk'
 
 import reducers from './reducers'
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk))
+const store = createStore(reducers, {}, applyMiddleware(thunk))
 window.store = store 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <Router/>
   </Provider>
   , document.getElementById('root'));
 

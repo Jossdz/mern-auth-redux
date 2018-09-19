@@ -9,12 +9,12 @@ const notification = (type, title, text) => {
 }
 
 export const loginUser = (username, password) => async dispatch => {
-  const res = await axios.post(`${baseURL}/login`, {username, password})
   try {
+    const res = await axios.post(`${baseURL}/login`, {username, password})
     notification('success', 'Bienvenido', res.data.username)
     dispatch({ type: LOGIN_USER, payload: res})
   }catch(err){
-    console.log(err)
+    notification('error', 'Error:', err.response.data.message)
   }
 }
 
@@ -30,7 +30,7 @@ export const signupUser = (username, password) => async dispatch => {
 }
 
 export const logoutUser = () => async dispatch => {
-  const res = await axios.get(`${baseURL}/logout`)
+  await axios.get(`${baseURL}/logout`)
   swal({ type: 'success', title: 'Adios' })
   dispatch({type: LOGOUT_USER, payload: {}})
 }
