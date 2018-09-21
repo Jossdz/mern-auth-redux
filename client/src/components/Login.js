@@ -4,7 +4,15 @@ import { connect } from 'react-redux'
 
 import * as actions from '../actions'
 
-
+import {Input,
+  InputLabel,
+  FormControl,
+  Button,
+  withStyles,
+  Grid,
+  Paper,
+  Typography
+} from '@material-ui/core'
 
 class Login extends Component {
   state = {
@@ -19,6 +27,7 @@ class Login extends Component {
       this.setState({ user })
     }
   }
+
 
   inputChange = event => {
     const { target } = event
@@ -35,29 +44,78 @@ class Login extends Component {
     this.props.loginUser(username, password)
   }
 
-  onRedirect = () => {
+  onRedirect = (classes) => {
     return (this.state.user === '') ?
-      <form onSubmit={this.submit}>
-        <label htmlFor='username'>Username</label>
-        <input onChange={this.inputChange} name='username' id='username' type='text'/>
-        <label htmlFor='password'>Password</label>
-        <input onChange={this.inputChange} name='password' id='password' type='password'/>
-        <input type='submit' value='Login' className='btn btn-success'/>
-        <span>  or <Link to='/signup'> Signup</Link></span>
-      </form> :
+      <div className={classes.root} style={{height:'100vh', paddingTop:'4rem'}}>
+      <Grid container spacing={24} justify='center' alignContent='center'>
+        <Grid item xs={6} >
+          <Paper className={classes.control}>
+            <Grid container spacing={24}>
+              <Grid item xs={12}>
+                <Typography variant='display2'>Login</Typography>
+              </Grid>
+            <form onSubmit={this.submit} className={classes.container}>
+              <Grid item xs={12}>
+                <FormControl className={classes.formControl} fullWidth>
+                  <InputLabel htmlFor='username'>Username</InputLabel>
+                  <Input onChange={this.inputChange} name='username' id='username' type='text'/>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl className={classes.formControl} fullWidth>
+                  <InputLabel htmlFor='password'>Password</InputLabel>
+                  <Input onChange={this.inputChange} name='password' id='password' type='password'/>
+                </FormControl>
+              </Grid>
+              <Grid container spacing={24} justify='center' alignItems='center'>
+                <Grid item xs={4}>
+                  <Button fullWidth variant="outlined" color="primary" type='submit' className='btn btn-success'>
+                    Signup
+                  </Button>
+                </Grid>
+                <Grid item xs={4}><Typography variant='caption' style={{padding:'0 3.5rem'}}> - or - </Typography></Grid>
+                <Grid item xs={4}><Link to='/login'><Button fullWidth>Login</Button></Link></Grid>
+              </Grid>
+            </form>
+            </Grid>
+          </Paper>
+        </Grid>
+      </Grid>  
+      </div> :
     <Redirect to='/'/>
   }
 
   render(){
     return <div>
-      <h1>Login</h1>
-      {this.onRedirect()}
+      {this.onRedirect(this.props.classes)}
     </div>
   }
 }
 
 const mapStateToProps = ({ auth }) => {
- return auth
-}
+  return auth
+ }
 
-export default connect(mapStateToProps, actions)(Login)
+ const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+  },
+  root: {
+    flexGrow: 1,
+    margin: '10rem, 0'
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: theme.spacing.unit * 2,
+  }
+});
+const styledSignup = withStyles(styles)(Login)
+
+export default connect(mapStateToProps, actions)(styledSignup)
