@@ -61,9 +61,17 @@ router.post("/signup", async (req, res, next) => {
       }
     }
 })
+
 router.get("/logout", (req, res) => {
   req.logout()
   res.status(200).json({message: 'You are out!'})
+})
+
+
+router.get('/loggedin', (req, res, next) => {
+  return (req.isAuthenticated())    ?
+    res.status(200).json(req.user)  :
+    res.status(403).json({ message: 'Unauthorized' })
 })
 
 module.exports = router
