@@ -8,6 +8,16 @@ const notification = (type, title, text) => {
   swal({type, title, text})
 }
 
+export const loggedin = () => async dispatch => {
+  try{
+    const res = await axios.get(`${baseURL}/loggedin`)
+    dispatch({ type: LOGIN_USER, payload:res})
+    console.log(res)
+  }catch(err){
+    console.log(err.response.data.message)
+  }
+}
+
 export const loginUser = (username, password) => async dispatch => {
   try {
     const res = await axios.post(`${baseURL}/login`, {username, password})

@@ -113,7 +113,7 @@ const mapStateToProps = ({ auth }) => {
     width: 100,
   },
   control: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 4,
   }
 });
 const styledSignup = withStyles(styles)(Login)
