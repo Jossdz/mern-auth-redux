@@ -8,13 +8,25 @@ const notification = (type, title, text) => {
   swal({type, title, text})
 }
 
+export const loggedin = () => async dispatch => {
+  try{
+    const res = await axios.get(`${baseURL}/loggedin`, { withCredentials: true })
+    dispatch({ type: LOGIN_USER, payload:res})
+    console.log(res)
+  }catch(err){
+    console.log(err.message)
+    // console.log(err.response.data.message)
+  }
+}
+
 export const loginUser = (username, password) => async dispatch => {
   try {
-    const res = await axios.post(`${baseURL}/login`, {username, password})
+    const res = await axios.post(`${baseURL}/login`, {username, password}, {withCredentials: true})
     notification('success', 'Bienvenido', res.data.username)
     dispatch({ type: LOGIN_USER, payload: res})
   }catch(err){
-    notification('error', 'Error:', err.response.data.message)
+    console.log(err)
+    //notification('error', 'Error:', err.response.data.message)
   }
 }
 
