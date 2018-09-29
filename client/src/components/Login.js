@@ -68,13 +68,11 @@ class Login extends Component {
                 </FormControl>
               </Grid>
               <Grid container spacing={24} justify='center' alignItems='center'>
-                <Grid item xs={4}>
+                <Grid item xs={12}>
                   <Button fullWidth variant="outlined" color="primary" type='submit' className='btn btn-success'>
-                    Signup
+                    Login
                   </Button>
                 </Grid>
-                <Grid item xs={4}><Typography variant='caption' style={{padding:'0 3.5rem'}}> - or - </Typography></Grid>
-                <Grid item xs={4}><Link to='/login'><Button fullWidth>Login</Button></Link></Grid>
               </Grid>
             </form>
             </Grid>

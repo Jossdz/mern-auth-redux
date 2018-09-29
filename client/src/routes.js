@@ -4,11 +4,9 @@ import { connect } from 'react-redux'
 import * as actions from './actions'
 
 import Header from './components/Header'
-import Signup from './components/Signup'
 import Login from './components/Login'
 import Private from './components/Private'
-
-const Home = () => <h1> Home </h1>
+import Home from './components/Home'
 
 class Router extends Component{
   componentWillMount(){
@@ -21,7 +19,6 @@ class Router extends Component{
       <Fragment>
         <Route exact path='/' component={Home} />
         <Route path='/login' component={Login}/>
-        <Route path='/signup' component={Signup}/>
         <Route path='/private' component={Private}/>
       </Fragment>
     </Fragment>

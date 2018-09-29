@@ -25,15 +25,12 @@ class Header extends React.Component{
     return (this.state.user === '') ?
       <Fragment>
         <Button color='inherit'>
-          <Link to='/signup'> Signup </Link>
-        </Button>
-        <Button color='inherit'>
           <Link to='/login'> Login </Link>
         </Button>
       </Fragment> :
       <Fragment>
         <Button color='inherit'>
-          <Link to='/private'> Private </Link>
+          <Link to='/private'> DashBoard </Link>
         </Button>
         <Button color='inherit' onClick={this.handleLogout}>
           Logout
@@ -49,7 +46,7 @@ class Header extends React.Component{
         <Toolbar>
           <Link to='/'>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              
+            <img src={'https://image.flaticon.com/icons/svg/676/676089.svg'} width='45px' alt='logo'></img>
           </IconButton>
           </Link>
           <Typography variant="title" color="inherit" className={classes.grow}>
